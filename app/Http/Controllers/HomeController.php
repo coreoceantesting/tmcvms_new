@@ -103,7 +103,7 @@ class HomeController extends Controller
             $query->where('pass_id', $passid);
         }
 
-        $visitors = $query->get();
+        $visitors = $query->where('exit_datetime',null)->orderBy('id','desc')->get();
         $department = Department::where('is_delete','0')->get();
         $VisitingPurpose = VisitingPurpose::where('is_delete','0')->get();
 
@@ -135,11 +135,57 @@ class HomeController extends Controller
             $query->where('organization', 'like', '%' . $oragnization . '%');
         }
 
-        $visitors = $query->get();
+        $visitors = $query->where('exit_datetime',null)->orderBy('id','desc')->get();
         $department = Department::where('is_delete','0')->get();
         $VisitingPurpose = VisitingPurpose::where('is_delete','0')->get();
         // $visitors = Visitors::all();
         return view('entry_visitor_list',compact('visitors','department','VisitingPurpose'));
+    }
+
+    public function update_visitor_exit_time($id)
+    {
+        $user = Visitors::find($id);
+        if (!$user) {
+            abort(404); // User not found
+        }
+        // Update the exit time for the user
+        $user->exit_datetime = now(); // Set the exit time to the current datetime
+        $user->save();
+        return redirect()->route('exitlist.visitor')->with('success', 'Exit time updated successfully');
+    }
+
+    public function exited_list_visitor(Request $request)
+    {
+        // $visitors = Visitors::all();
+
+        $name = $request->input('name');
+        $mobno = $request->input('mobnumber');
+        $dept = $request->input('dept');
+        $passid = $request->input('passid');
+
+        $query = visitors::query();
+
+        if ($name) {
+            $query->where('name', 'like', '%' . $name . '%');
+        }
+
+        if ($mobno) {
+            $query->where('mobile', $mobno);
+        }
+
+        if ($dept) {
+            $query->where('visiting_dept', $dept);
+        }
+
+        if ($passid) {
+            $query->where('pass_id', $passid);
+        }
+
+        $visitors = $query->where('exit_datetime','!=',null)->orderBy('id','desc')->get();
+        $department = Department::where('is_delete','0')->get();
+        $VisitingPurpose = VisitingPurpose::where('is_delete','0')->get();
+
+        return view('exited',compact('visitors','department','VisitingPurpose'));
     }
 
 }

@@ -35,9 +35,9 @@ li {
     <div class="row justify-content-center">
         <div class="col-xl-12 col-md-12 mb-4">
             <div class="card">
-                <div class="card-header text-white bg-primary align-items-center d-flex" style="justify-content: space-between;"><strong>Visitor Exit List</strong></div>
+                <div class="card-header text-white bg-primary align-items-center d-flex" style="justify-content: space-between;"><strong>Exited Visitor List</strong></div>
                 <div class="card-body">
-                    <form action="{{ route('exitlist.visitor') }}" method="GET">
+                    <form action="{{ route('exitedlist.visitor') }}" method="GET">
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="Name"><strong>Name</strong></label>
@@ -77,16 +77,10 @@ li {
                             <ul>
                                 <li><strong>Pass ID:</strong> {{$visitor->pass_id}}</li>
                                 <li><strong>Mobile Number:</strong> {{$visitor->mobile}}</li>
-                                <li><strong>Date And Time:</strong> {{$visitor->entry_datetime}}</li>
+                                <li><strong>Entry Date And Time:</strong> {{ \Carbon\Carbon::parse($visitor->entry_datetime)->format('d-m-Y h:i:s A')}}</li>
+                                <li><strong>Exit Date And Time:</strong> {{ \Carbon\Carbon::parse($visitor->exit_datetime)->format('d-m-Y h:i:s A')}}</li>
                                 <li><strong>Oragnization:</strong> {{$visitor->organization}}</li>
                             </ul>
-                        </div>
-                        <div class="card-footer bg-primary border-primary">
-                            <form action="{{ route('update.exit', ['id' => $visitor->id]) }}" method="POST">
-                                @csrf
-                                @method('POST')
-                                <button type="submit" class="btn btn-danger">Exit</button>
-                            </form>
                         </div>
                     </div>
                 </div>

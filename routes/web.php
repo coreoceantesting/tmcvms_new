@@ -26,6 +26,8 @@ Route::get('/register-visitor', [App\Http\Controllers\HomeController::class, 're
 Route::post('/store-visitor', [App\Http\Controllers\HomeController::class, 'store_visitor'])->name('visitor.store');
 Route::get('/exit-list-visitor', [App\Http\Controllers\HomeController::class, 'exit_list_visitor'])->name('exitlist.visitor');
 Route::get('/entry-list-visitor', [App\Http\Controllers\HomeController::class, 'entry_list_visitor'])->name('entrylist.visitor');
+Route::post('/visitor-exit/{id}', [App\Http\Controllers\HomeController::class, 'update_visitor_exit_time'])->name('update.exit');
+Route::get('/exited-list-visitor', [App\Http\Controllers\HomeController::class, 'exited_list_visitor'])->name('exitedlist.visitor');
 
 // Masters Route
 

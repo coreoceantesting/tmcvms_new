@@ -45,14 +45,20 @@
 
     <li class="nav-item active">
         <a class="nav-link" href="{{route('entrylist.visitor')}}">
-            <i class="fas fa-fw fa-folder"></i>
+            <i class="fas fa-angle-double-right"></i>
             <span>Visitor Entry</span></a>
     </li>
 
     <li class="nav-item active">
         <a class="nav-link" href="{{route('exitlist.visitor')}}">
-            <i class="fas fa-fw fa-folder"></i>
+            <i class="fas fa-angle-double-left"></i>
             <span>Visitor Exit</span></a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route('exitedlist.visitor')}}">
+            <i class="fas fa-angle-double-left"></i>
+            <span>Exited Visitor List</span></a>
     </li>
 
     

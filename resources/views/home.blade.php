@@ -31,7 +31,7 @@
 
        <div class="row">
             <div class="col">
-                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                <div class="card border-dark mb-3" >
                     <div class="card-header text-center" style="background-color: #4e73df;color:white"><b>Today's Entry</b></div>
                     <div class="card-body p-1">
                     {{-- <h5 class="card-title">Warning card title</h5> --}}
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                <div class="card border-dark mb-3">
                     <div class="card-header text-center" style="background-color: #4e73df;color:white"><b>Today's Exit</b></div>
                     <div class="card-body p-1">
                     {{-- <h5 class="card-title">Info card title</h5> --}}
@@ -52,8 +52,8 @@
        <br>
 
        <div class="row">
-            <div class="col text-center" style="margin-left: 6%;">
-                <div class="card border-dark mb-3" style="max-width: 18rem;">
+            <div class="col text-center">
+                <div class="card border-dark mb-3">
                     <div class="d-flex flex-row justify-content-between">
                     <div class="text-center" style="background-color: #4e73df; color: white; flex: 2;padding-top:6px">
                             <b>Today's Pending For Exit</b>
@@ -74,7 +74,7 @@
         <br>
        <div class="row">
             <div class="col">
-                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                <div class="card border-dark mb-3">
                     <div class="card-header text-center" style="background-color: #4e73df;color:white"><b>3-hrs Plus</b></div>
                     <div class="card-body p-1">
                     {{-- <h5 class="card-title">Warning card title</h5> --}}
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                <div class="card border-dark mb-3">
                     <div class="card-header text-center" style="background-color: #4e73df;color:white"><b>5-hrs Plus</b></div>
                     <div class="card-body p-1">
                     {{-- <h5 class="card-title">Info card title</h5> --}}
