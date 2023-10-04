@@ -55,11 +55,13 @@
             <div class="col text-center" style="margin-left: 6%;">
                 <div class="card border-dark mb-3" style="max-width: 18rem;">
                     <div class="d-flex flex-row justify-content-between">
-                    <div class="text-center" style="background-color: #4e73df; color: white; flex: 2;">
+                    <div class="text-center" style="background-color: #4e73df; color: white; flex: 2;padding-top:6px">
                             <b>Today's Pending For Exit</b>
                         </div>
                         <div style="flex: 2;">
-                            <div class="card-body p-1">
+                            <div class="card-body p-1" style="
+                            padding: 0.75rem!important;
+                        ">
                                 <p class="card-text text-center" style="font-size: xx-large;">{{$todayPendingExitCount}}</p>
                             </div>
                         </div>
