@@ -32,10 +32,24 @@ class HomeController extends Controller
         $today = Carbon::now()->toDateString();
 
         $todayEntryVisitorsCount = DB::table('visitors')->whereDate('entry_datetime', $today)->count();
-        $todayExitVisitorsCount = DB::table('visitors')->whereDate('entry_datetime', $today)->where('exit_datetime','!=','')->count();
+        $todayExitVisitorsCount = DB::table('visitors')->whereDate('entry_datetime', $today)->where('exit_datetime','!=',null)->count();
         $todayPendingExitCount = DB::table('visitors')->whereDate('entry_datetime', $today)->where('exit_datetime','=',null)->count();
+        $durationInMinutes = 3 * 60; // 3 hours * 60 minutes/hour
+        $durationInMinutesnew = 3 * 60; // 3 hours * 60 minutes/hour
 
-        return view('home',compact('todayEntryVisitorsCount','todayExitVisitorsCount','todayPendingExitCount'));
+        $morethanthreehourscount = DB::table('visitors')
+            ->select(DB::raw('COUNT(*) as count'))
+            ->whereRaw('TIMESTAMPDIFF(MINUTE, entry_datetime, exit_datetime) > ?', [$durationInMinutes])
+            ->first()
+            ->count;
+
+            $morethanfivehourscount = DB::table('visitors')
+            ->select(DB::raw('COUNT(*) as count'))
+            ->whereRaw('TIMESTAMPDIFF(MINUTE, entry_datetime, exit_datetime) > ?', [$durationInMinutesnew])
+            ->first()
+            ->count;
+
+        return view('home',compact('todayEntryVisitorsCount','todayExitVisitorsCount','todayPendingExitCount','morethanthreehourscount','morethanfivehourscount'));
     }
 
     public function register_visitor()

@@ -78,7 +78,7 @@
                     <div class="card-header text-center" style="background-color: #4e73df;color:white"><b>3-hrs Plus</b></div>
                     <div class="card-body p-1">
                     {{-- <h5 class="card-title">Warning card title</h5> --}}
-                    <p class="card-text text-center" style="font-size: xx-large;">0</p>
+                    <p class="card-text text-center" style="font-size: xx-large;">{{$morethanthreehourscount}}</p>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     <div class="card-header text-center" style="background-color: #4e73df;color:white"><b>5-hrs Plus</b></div>
                     <div class="card-body p-1">
                     {{-- <h5 class="card-title">Info card title</h5> --}}
-                    <p class="card-text text-center" style="font-size: xx-large;">0</p>
+                    <p class="card-text text-center" style="font-size: xx-large;">{{$morethanfivehourscount}}</p>
                     </div>
                 </div>
             </div>
