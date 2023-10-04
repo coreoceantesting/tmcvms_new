@@ -60,7 +60,7 @@ class HomeController extends Controller
          $unique_pass_id = Visitors::where('pass_id',$request->input('pass_id'))->where('exit_datetime',null)->count();
          if($unique_pass_id > 0)
          {
-            return back()->with('error', 'This visitor pass id is already assigend to someone please use diffrent pass id.');
+            return redirect()->route('register.visitor')->with('error', 'This visitor pass id is already assigend to someone please use diffrent pass id.');
          }
 
          Visitors::create([
@@ -73,7 +73,7 @@ class HomeController extends Controller
             'pass_id' => $request->input('pass_id'),
             'entry_datetime' => Carbon::now(),
         ]);
-         return back()->with('success', 'Visitor is successfully Store');
+         return redirect()->route('register.visitor')->with('success', 'Visitor is successfully Store');
     }
 
     public function exit_list_visitor(Request $request)
