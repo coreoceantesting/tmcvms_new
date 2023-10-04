@@ -61,6 +61,18 @@
             <span>Exited Visitor List</span></a>
     </li>
 
+    <li class="nav-item active">
+        <a class="nav-link" href="#">
+            <i class="fas fa-file-contract"></i>
+            <span>T & C</span></a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link" href="#">
+            <i class="fas fa-shield-alt"></i>
+            <span>Privacy Policy</span></a>
+    </li>
+
     
 
     <!-- Heading -->
