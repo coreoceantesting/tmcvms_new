@@ -129,12 +129,7 @@
 
                             <div class="col-md-6">
                                 <input id="pass_id" type="text" class="form-control @error('pass_id') is-invalid @enderror" name="pass_id" value="{{ old('pass_id') }}" required>
-
-                                @error('pass_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <span id="passIdStatus"></span>
                             </div>
                         </div>
 
@@ -156,4 +151,40 @@
 
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // JavaScript to handle Pass ID validation with jQuery
+    $(document).ready(function() {
+        $('#pass_id').on('input', function() {
+            var passId = $(this).val();
+
+            if (!passId) {
+                $('#passIdStatus').text('');
+                return;
+            }
+
+            // Make an AJAX request to check the Pass ID
+            $.ajax({
+                url: '/check-pass-id',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    pass_id: passId
+                },
+                success: function(data) {
+                    $('#passIdStatus').text(data.message);
+                    if (data.message === 'Pass ID is already assigned.') {
+                        $('#pass_id')[0].setCustomValidity('Pass ID is already assigned.');
+                    } else {
+                        $('#pass_id')[0].setCustomValidity('');
+                    }
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+</script>
 @endsection
+    

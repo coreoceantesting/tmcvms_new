@@ -71,11 +71,11 @@ class HomeController extends Controller
             'pass_id' => 'required'
          ]);
 
-         $unique_pass_id = Visitors::where('pass_id',$request->input('pass_id'))->where('exit_datetime',null)->count();
-         if($unique_pass_id > 0)
-         {
-            return redirect()->route('register.visitor')->with('error', 'This visitor pass id is already assigend to someone please use diffrent pass id.');
-         }
+        //  $unique_pass_id = Visitors::where('pass_id',$request->input('pass_id'))->where('exit_datetime',null)->count();
+        //  if($unique_pass_id > 0)
+        //  {
+        //     return redirect()->route('register.visitor')->with('error', 'This visitor pass id is already assigend to someone please use diffrent pass id.');
+        //  }
 
          Visitors::create([
             'name' => $request->input('name'),
@@ -200,6 +200,21 @@ class HomeController extends Controller
         $VisitingPurpose = VisitingPurpose::where('is_delete','0')->get();
 
         return view('exited',compact('visitors','department','VisitingPurpose'));
+    }
+
+    public function checkPassId(Request $request) {
+        $passId = $request->input('pass_id');
+    
+        // Check if the pass_id exists in the database
+        $pass = Visitors::where('pass_id',$passId)->where('exit_datetime',null)->count();
+    
+        if ($pass > 0) {
+            // Pass ID is already assigned
+            return response()->json(['message' => 'Pass ID is already assigned.'], 200);
+        }
+    
+        // Pass ID is available
+        return response()->json(['message' => 'Pass ID is available.'], 200);
     }
 
 }
