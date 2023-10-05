@@ -3,7 +3,8 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('home')}}">
         <div class="sidebar-brand-icon ">
-            <i class="fas fa-address-card"></i>
+            <img class="img-profile" width="60" height="60"
+                    src="{{asset('admin/img/TMC-logo.jpg')}}">
         </div>
         <div class="sidebar-brand-text mx-3">TMC</div>
     </a>
