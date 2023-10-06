@@ -47,3 +47,14 @@ Route::post('/store-visiting-purpose', [App\Http\Controllers\MastersController::
 Route::get('/edit-visiting-pupose/{id}', [App\Http\Controllers\MastersController::class, 'edit_visiting_purpose'])->name('edit.visiting_purpose');
 Route::put('/update-visiting-purpose/{id}', [App\Http\Controllers\MastersController::class, 'update_visiting_purpose'])->name('update.visiting_purpose');
 Route::delete('/delete-visiting-purpose/{id}', [App\Http\Controllers\MastersController::class, 'delete_visiting_purpose'])->name('delete.visiting_purpose');
+
+// Change password routes
+// Display the password change form
+Route::get('/change-password',[App\Http\Controllers\ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
+
+// Handle the form submission
+Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::class, 'changePassword'])->name('password.update');
+
+// term and condition & Privacy policy
+Route::get('/term-condition', [App\Http\Controllers\HomeController::class, 'term_condition'])->name('term.condition');
+Route::get('/privacy-policy', [App\Http\Controllers\HomeController::class, 'privacy_policy'])->name('privacy.policy');

@@ -217,4 +217,14 @@ class HomeController extends Controller
         return response()->json(['message' => 'Pass ID is available.'], 200);
     }
 
+    public function term_condition()
+    {
+        return view('term_condition');
+    }
+
+    public function privacy_policy()
+    {
+        return view('privacy_policy');
+    }
+
 }

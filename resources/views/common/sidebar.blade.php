@@ -63,13 +63,19 @@
     </li>
 
     <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('term.condition')}}">
             <i class="fas fa-file-contract"></i>
             <span>T & C</span></a>
     </li>
 
     <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('password.change')}}">
+            <i class="fas fa-unlock-alt"></i>
+            <span>Change Password</span></a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route('privacy.policy')}}">
             <i class="fas fa-shield-alt"></i>
             <span>Privacy Policy</span></a>
     </li>
