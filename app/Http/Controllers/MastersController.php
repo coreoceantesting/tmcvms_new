@@ -6,6 +6,7 @@ use App\Models\Export;
 use App\Models\Visitors;
 use App\Models\Department;
 use App\Models\User;
+use App\Models\Passfor;
 use App\Models\VisitingPurpose;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -237,6 +238,65 @@ class MastersController extends Controller
         ]);
     
         return redirect()->route('list.users')->with('success', 'User is deleted successfully.');
+    }
+
+    // pass made for master section start
+
+    public function pass_for_list(Request $request)
+    {
+        $name = $request->input('name');
+
+        $query = Passfor::query();
+
+        if ($name) 
+        {
+            $query->where('name', 'like', '%' . $name . '%');
+        }
+        $list = $query->where('is_delete','0')->get();
+        return view('Masters.pass_for_list',compact('list'));
+    }
+
+    public function add_pass_for()
+    {
+        return view('Masters.add_pass_for');
+    }
+
+    public function store_pass_for(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+         ]);
+         Passfor::create([
+            'name' => $request->input('name'),
+        ]);
+         return redirect()->route('list.pass_for')->with('success', 'Data is successfully Store');
+    }
+
+    public function edit_pass_for($id)
+    {
+        $list = Passfor::findOrFail($id);
+        return view('Masters.edit_pass_for', compact('list'));
+    }
+
+    public function update_pass_for(Request $request, $id)
+    {
+        $item = Passfor::findOrFail($id); // Replace 'Item' with your model
+        $item->update([
+            'name' => $request->input('name'),
+        ]);
+    
+        return redirect()->route('list.pass_for')->with('success', 'Data updated successfully.');
+    }
+
+    public function delete_pass_for($id)
+    {
+        $item = Passfor::findOrFail($id);
+        // dd($item); // Replace 'Item' with your model
+        $item->update([
+            'is_delete' =>'1'
+        ]);
+    
+        return redirect()->route('list.pass_for')->with('success', 'Data deleted successfully.');
     }
 
 

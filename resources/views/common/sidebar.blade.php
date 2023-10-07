@@ -34,9 +34,10 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{route('list.visiting_purpose')}}">Purpose Of Visit</a>
-                    <a class="collapse-item" href="{{route('list.department')}}">Visiting Department</a>
                     <a class="collapse-item" href="{{route('list.users')}}">Users Registration </a>
+                    <a class="collapse-item" href="{{route('list.department')}}">Departments</a>
+                    <a class="collapse-item" href="{{route('list.visiting_purpose')}}">Purpose Of Visit</a>
+                    <a class="collapse-item" href="{{route('list.pass_for')}}">Pass Made For</a>
                 </div>
             </div>
         </li>

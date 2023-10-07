@@ -56,6 +56,14 @@ Route::get('/edit-users/{id}', [App\Http\Controllers\MastersController::class, '
 Route::put('/update-users/{id}', [App\Http\Controllers\MastersController::class, 'update_users'])->name('update.users');
 Route::delete('/delete-users/{id}', [App\Http\Controllers\MastersController::class, 'delete_users'])->name('delete.users');
 
+// pass made for 
+Route::get('/pass-for-list', [App\Http\Controllers\MastersController::class, 'pass_for_list'])->name('list.pass_for');
+Route::get('/add-pass-for', [App\Http\Controllers\MastersController::class, 'add_pass_for'])->name('add.pass_for');
+Route::post('/store-pass-for', [App\Http\Controllers\MastersController::class, 'store_pass_for'])->name('store.pass_for');
+Route::get('/edit-pass-for/{id}', [App\Http\Controllers\MastersController::class, 'edit_pass_for'])->name('edit.pass_for');
+Route::put('/update-pass-for/{id}', [App\Http\Controllers\MastersController::class, 'update_pass_for'])->name('update.pass_for');
+Route::delete('/delete-pass-for/{id}', [App\Http\Controllers\MastersController::class, 'delete_pass_for'])->name('delete.pass_for');
+
 // Change password routes
 // Display the password change form
 Route::get('/change-password',[App\Http\Controllers\ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
