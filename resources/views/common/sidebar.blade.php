@@ -36,7 +36,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{route('list.visiting_purpose')}}">Purpose Of Visit</a>
                     <a class="collapse-item" href="{{route('list.department')}}">Visiting Department</a>
-                    {{-- <a class="collapse-item" href="#">Register Login Users</a> --}}
+                    <a class="collapse-item" href="{{route('list.users')}}">Users Registration </a>
                 </div>
             </div>
         </li>

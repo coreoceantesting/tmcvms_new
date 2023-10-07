@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Export;
 use App\Models\Visitors;
 use App\Models\Department;
+use App\Models\User;
 use App\Models\VisitingPurpose;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 
@@ -140,6 +142,102 @@ class MastersController extends Controller
         return redirect()->route('list.visiting_purpose')->with('success', 'Visiting purpose deleted successfully.');
     }
 
+    // user registration section start
+    
+    public function users_list(Request $request)
+    {
+        $name = $request->input('name');
+        $user_type = $request->input('role');
+
+        $query = User::query();
+
+        if ($name) 
+        {
+            $query->where('name', 'like', '%' . $name . '%');
+        }
+
+        if ($user_type) 
+        {
+            $query->where('role',$user_type);
+        }
+
+        $user_list = $query->where('is_delete','0')->get();
+        return view('Masters.users_register',compact('user_list'));
+    }
+
+    public function add_users()
+    {
+        $department = Department::where('is_delete','0')->get();
+        return view('Masters.add_users',compact('department'));
+    }
+
+    public function store_users(Request $request)
+    {
+        $this->validate($request, [
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'mobileno' => ['required', 'string', 'max:255'],
+            'gender' => ['required'],
+            'empid' => ['required'],
+            'username' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required'],
+         ]);
+
+         User::create([
+            'name' => $request->input('first_name'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'mobno' => $request->input('mobileno'),
+            'gender' => $request->input('gender'),
+            'empid' => $request->input('empid'),
+            'username' => $request->input('username'),
+            'department' => $request->input('dept'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'role' => $request->input('role'),   
+        ]);
+
+        return redirect()->route('list.users')->with('success', 'User is successfully Register');
+    }
+
+    public function edit_users(Request $request,$id)
+    {
+        $user = User::findOrFail($id);
+        $department = Department::where('is_delete','0')->get();
+        return view('Masters.edit_user', compact('user','department'));
+    }
+
+    public function update_users(Request $request, $id)
+    {
+        $item = User::findOrFail($id); // Replace 'Item' with your model
+        $item->update([
+            'name' => $request->input('first_name'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'mobno' => $request->input('mobileno'),
+            'gender' => $request->input('gender'),
+            'empid' => $request->input('empid'),
+            'username' => $request->input('username'),
+            'department' => $request->input('dept'),
+            'email' => $request->input('email'),
+            'role' => $request->input('role'),
+        ]);
+    
+        return redirect()->route('list.users')->with('success', 'User is successfully Updated.');
+    }
+
+    public function delete_users($id)
+    {
+        $item = User::findOrFail($id);
+        // dd($item); // Replace 'Item' with your model
+        $item->update([
+            'is_delete' =>'1'
+        ]);
+    
+        return redirect()->route('list.users')->with('success', 'User is deleted successfully.');
+    }
 
 
 }
