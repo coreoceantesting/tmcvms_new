@@ -7,6 +7,7 @@ use App\Models\Visitors;
 use App\Models\Department;
 use App\Models\User;
 use App\Models\Passfor;
+use App\Models\PassValidity;
 use App\Models\VisitingPurpose;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -299,5 +300,66 @@ class MastersController extends Controller
         return redirect()->route('list.pass_for')->with('success', 'Data deleted successfully.');
     }
 
+    // pass validity master section start
+
+    public function pass_validity_list(Request $request)
+    {
+        $name = $request->input('name');
+
+        $query = PassValidity::query();
+
+        if ($name) 
+        {
+            $query->where('name', 'like', '%' . $name . '%');
+        }
+        $list = $query->where('is_delete','0')->get();
+        return view('Masters.pass_validity_list',compact('list'));
+    }
+
+    public function add_pass_validity()
+    {
+        return view('Masters.add_pass_validity');
+    }
+
+    public function store_pass_validity(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'no_of_days' => 'required',
+         ]);
+         PassValidity::create([
+            'name' => $request->input('name'),
+            'no_of_days' => $request->input('no_of_days'),
+        ]);
+         return redirect()->route('list.pass_validity')->with('success', 'Data is successfully Store');
+    }
+
+    public function edit_pass_validity($id)
+    {
+        $list = PassValidity::findOrFail($id);
+        return view('Masters.edit_pass_validity', compact('list'));
+    }
+
+    public function update_pass_validity(Request $request, $id)
+    {
+        $item = PassValidity::findOrFail($id); // Replace 'Item' with your model
+        $item->update([
+            'name' => $request->input('name'),
+            'no_of_days' => $request->input('no_of_days'),
+        ]);
+    
+        return redirect()->route('list.pass_validity')->with('success', 'Data updated successfully.');
+    }
+
+    public function delete_pass_validity($id)
+    {
+        $item = PassValidity::findOrFail($id);
+        // dd($item); // Replace 'Item' with your model
+        $item->update([
+            'is_delete' =>'1'
+        ]);
+    
+        return redirect()->route('list.pass_validity')->with('success', 'Data deleted successfully.');
+    }
 
 }

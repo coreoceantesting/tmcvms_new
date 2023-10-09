@@ -227,4 +227,9 @@ class HomeController extends Controller
         return view('privacy_policy');
     }
 
+    public function special_pass()
+    {
+        return view('specialpass');
+    }
+
 }

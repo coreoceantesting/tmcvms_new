@@ -38,6 +38,7 @@
                     <a class="collapse-item" href="{{route('list.department')}}">Departments</a>
                     <a class="collapse-item" href="{{route('list.visiting_purpose')}}">Purpose Of Visit</a>
                     <a class="collapse-item" href="{{route('list.pass_for')}}">Pass Made For</a>
+                    <a class="collapse-item" href="{{route('list.pass_validity')}}">Pass Validity</a>
                 </div>
             </div>
         </li>
@@ -49,6 +50,12 @@
         <a class="nav-link" href="{{route('entrylist.visitor')}}">
             <i class="fas fa-angle-double-right"></i>
             <span>Visitor Entry</span></a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route('specialpass')}}">
+            <i class="fas fa-ticket-alt"></i>
+            <span>Visitor Special Pass</span></a>
     </li>
 
     <li class="nav-item active">

@@ -64,6 +64,19 @@ Route::get('/edit-pass-for/{id}', [App\Http\Controllers\MastersController::class
 Route::put('/update-pass-for/{id}', [App\Http\Controllers\MastersController::class, 'update_pass_for'])->name('update.pass_for');
 Route::delete('/delete-pass-for/{id}', [App\Http\Controllers\MastersController::class, 'delete_pass_for'])->name('delete.pass_for');
 
+// pass validity master 
+Route::get('/pass-validity-list', [App\Http\Controllers\MastersController::class, 'pass_validity_list'])->name('list.pass_validity');
+Route::get('/add-pass-validity', [App\Http\Controllers\MastersController::class, 'add_pass_validity'])->name('add.pass_validity');
+Route::post('/store-pass-validity', [App\Http\Controllers\MastersController::class, 'store_pass_validity'])->name('store.pass_validity');
+Route::get('/edit-pass-validity/{id}', [App\Http\Controllers\MastersController::class, 'edit_pass_validity'])->name('edit.pass_validity');
+Route::put('/update-pass-validity/{id}', [App\Http\Controllers\MastersController::class, 'update_pass_validity'])->name('update.pass_validity');
+Route::delete('/delete-pass-validity/{id}', [App\Http\Controllers\MastersController::class, 'delete_pass_validity'])->name('delete.pass_validity');
+
+// Special Pass routes
+
+Route::get('/special-pass-visitor', [App\Http\Controllers\HomeController::class, 'special_pass'])->name('specialpass');
+
+
 // Change password routes
 // Display the password change form
 Route::get('/change-password',[App\Http\Controllers\ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
