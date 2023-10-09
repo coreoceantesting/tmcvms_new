@@ -5,8 +5,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Export;
 use App\Models\Visitors;
+use App\Models\PassValidity;
 use App\Models\VisitingPurpose;
 use App\Models\Department;
+use App\Models\Passfor;
 use Carbon\Carbon;
 
 
@@ -227,9 +229,101 @@ class HomeController extends Controller
         return view('privacy_policy');
     }
 
-    public function special_pass()
+    public function special_pass(Request $request)
     {
-        return view('specialpass');
+        $name = $request->input('name');
+        $mobno = $request->input('mobnumber');
+        $dept = $request->input('dept');
+        $oragnization = $request->input('oraganization');
+
+        $query = DB::table('special_pass_visitors');
+
+        if ($name) {
+            $query->where('first_name', 'like', '%' . $name . '%');
+        }
+
+        if ($mobno) {
+            $query->where('mob_no', $mobno);
+        }
+
+        if ($dept) {
+            $query->where('department_name', $dept);
+        }
+
+        if ($oragnization) {
+            $query->where('organization_name', 'like', '%' . $oragnization . '%');
+        }
+
+        $visitors = $query->orderBy('special_pass_visitors_id','desc')->get();
+        $department = Department::where('is_delete','0')->get();
+        $VisitingPurpose = VisitingPurpose::where('is_delete','0')->get();
+        // $visitors = Visitors::all();
+        return view('specialpass',compact('visitors','department','VisitingPurpose'));
+    }
+
+    public function add_specialpass()
+    {
+        $department = Department::where('is_delete','0')->get();
+        $PassValidity = PassValidity::where('is_delete','0')->get();
+        $Passfor = Passfor::where('is_delete','0')->get();
+        return view('add_specialpass',compact('department','PassValidity','Passfor'));
+    }
+
+    public function store_special_pass(Request $request)
+    {
+        $request->validate([
+            'f_name' => 'required|string',
+            'l_name' => 'required|string',
+            'age' => 'required|integer',
+            'email' => 'required|email',
+            'address' => 'required',
+            'mobile' => ['required', 'numeric', 'digits:10'],
+            'organization' => 'required',
+            'visiting_dept' => 'required',
+            'validity' => 'required',
+            'made_for' => 'required',
+            'photo' => 'required', // Customize for image uploads
+        ]);
+
+        $unique_pass_id = 'TMC-'.date('Y-m');
+    
+        $data = [
+            'first_name' => $request->input('f_name'),
+            'special_pass_visitor_unique_id'=>$unique_pass_id,
+            'middle_name' => $request->input('m_name'),
+            'last_name' => $request->input('l_name'),
+            'age' => $request->input('age'),
+            'email' => $request->input('email'),
+            'address' => $request->input('address'),
+            'mob_no' => $request->input('mobile'),
+            'organization_name' => $request->input('organization'),
+            'department_name' => $request->input('visiting_dept'),
+            'pass_validity' => $request->input('validity'),
+            'pass_made_for_type' => $request->input('made_for'),
+            'valid_from' => date('d-m-Y'),
+            'valid_till' => $request->input('valid_till'),
+        ];
+
+        if ($request->hasFile('photo')) {
+            // Specify the folder where you want to save the images
+            $folderName = 'admin/img';
+
+            // Get the uploaded file
+            $imageFile = $request->file('photo');
+
+            // Generate a unique filename for the image (e.g., using timestamp)
+            $imageName = time() . '.' . $imageFile->getClientOriginalExtension();
+
+            // Move the uploaded file to the specified folder
+            $imageFile->move(public_path($folderName), $imageName);
+
+
+            $data['photo'] = $folderName . '/' . $imageName;
+        }
+    
+        DB::table('special_pass_visitors')->insert($data);
+    
+        return redirect()->route('add.specialpass')->with('success', 'Visitor information has been stored successfully.');
     }
 
 }
