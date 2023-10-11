@@ -57,6 +57,12 @@
             <i class="fas fa-ticket-alt"></i>
             <span>Visitor Special Pass</span></a>
     </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route('pending.special_pass')}}">
+            <i class="fas fa-hourglass-half"></i>
+            <span>Pending Special Pass</span></a>
+    </li>
 
     <li class="nav-item active">
         <a class="nav-link" href="{{route('exitlist.visitor')}}">
