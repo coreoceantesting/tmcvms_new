@@ -94,3 +94,9 @@ Route::post('/change-password', [App\Http\Controllers\ChangePasswordController::
 // term and condition & Privacy policy
 Route::get('/term-condition', [App\Http\Controllers\HomeController::class, 'term_condition'])->name('term.condition');
 Route::get('/privacy-policy', [App\Http\Controllers\HomeController::class, 'privacy_policy'])->name('privacy.policy');
+
+// external link submit form
+
+Route::get('/entry-form', [App\Http\Controllers\UserController::class, 'index'])->name('entry.form');
+Route::post('/store-entry', [App\Http\Controllers\UserController::class, 'store_entry'])->name('entry.store');
+Route::get('/view-form', [App\Http\Controllers\UserController::class, 'view_entry'])->name('entry.view');

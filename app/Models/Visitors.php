@@ -17,6 +17,7 @@ class Visitors extends Model
         'to_visit',
         'pass_id',
         'entry_datetime',
-        'exit_datetime'
+        'exit_datetime',
+        'photo'
     ];
 }
