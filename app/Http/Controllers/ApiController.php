@@ -11,6 +11,7 @@ use App\Models\Department;
 use App\Models\Visitors;
 use Carbon\Carbon;
 use DB;
+dd('hii');
 
 class ApiController extends Controller
 {
